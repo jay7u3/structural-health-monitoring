@@ -1,0 +1,43 @@
+paths:
+  raw_data_dir: ../datas
+  parquet_dir: ./parquet
+  artifacts_dir: ./artifacts
+
+splits:
+  train_end: "2020-12-31"
+  val_end:   "2021-06-30"
+  # test = everything after val_end
+
+features:
+  fft_bands: 5
+  wavelet: db4
+  wavelet_levels: 4
+  per_channel: true
+  use_environmental: true
+  use_weather_onehot: true
+  use_cyclical_time: true
+
+baseline_gbm:
+  n_estimators: 1000
+  learning_rate: 0.05
+  num_leaves: 63
+  min_child_samples: 50
+  class_weight: balanced
+  early_stopping_rounds: 50
+
+cnn1d:
+  batch_size: 64
+  epochs: 40
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  focal_gamma: 2.0
+  patience: 6
+
+autoencoder:
+  batch_size: 64
+  epochs: 30
+  lr: 1.0e-3
+  patience: 5
+  latent_dim: 64
+
+seed: 42
